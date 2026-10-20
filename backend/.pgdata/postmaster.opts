@@ -1,0 +1,1 @@
+/usr/bin/postgres "-D" ".pgdata" "-p" "5433" "-k" "/home/bobi/Desktop/Python projects hccda/todo/backend/.pgdata"

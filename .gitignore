@@ -1,0 +1,51 @@
+# ============================================================================
+# FILE:       .gitignore
+# PURPOSE:    Tell git which files to NEVER commit to version control.
+# HOW IT WORKS: One pattern per line; `#` starts a comment; `!` negates.
+#             Anything matching a pattern is invisible to `git add/status`.
+# USED BY / DEPENDS ON: read automatically by the git program.
+# KEY CONCEPTS: secrets hygiene, build artifacts, dependency folders.
+# ============================================================================
+
+# --- Secrets: real credentials live only in .env (the .example is safe) ----
+.env
+backend/.env
+
+# --- Python ---------------------------------------------------------------
+# Virtual environment folder (a private copy of the interpreter + packages)
+.venv/
+venv/
+# Byte-code caches created by the interpreter on import
+__pycache__/
+*.py[cod]
+# Editable-install markers produced by pip
+*.egg-info/
+
+# --- Node / frontend ------------------------------------------------------
+# Downloaded JS packages (re-creatable with `npm install`)
+node_modules/
+# Bundled production output (created by `npm run build`)
+frontend/dist/
+# Vite dependency cache; deleting it forces a clean re-optimize
+.vite/
+
+# --- Test & coverage artifacts -------------------------------------------
+.pytest_cache/
+.coverage
+htmlcov/
+
+# --- Chatbot diagnostics log ----------------------------------------------
+backend/logs/
+
+# --- Editor / OS noise ----------------------------------------------------
+.vscode/
+.idea/
+*.swp
+.DS_Store
+
+# --- Local environment files ---------------------------------------------
+# Only the *example* env files are committed; real ones are per-machine
+frontend/.env
+!frontend/.env.example
+!backend/.env.example
+.andromity/

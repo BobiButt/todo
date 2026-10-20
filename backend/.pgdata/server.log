@@ -1,0 +1,8 @@
+2026-10-14 19:25:10.616 PKT [7414] LOG:  redirecting log output to logging collector process
+2026-10-14 19:25:10.616 PKT [7414] HINT:  Future log output will appear in directory "log".
+2026-10-20 15:01:22.887 PKT [137206] LOG:  redirecting log output to logging collector process
+2026-10-20 15:01:22.887 PKT [137206] HINT:  Future log output will appear in directory "log".
+2026-10-20 15:02:05.587 PKT [137273] LOG:  redirecting log output to logging collector process
+2026-10-20 15:02:05.587 PKT [137273] HINT:  Future log output will appear in directory "log".
+2026-10-20 15:02:37.787 PKT [137339] LOG:  redirecting log output to logging collector process
+2026-10-20 15:02:37.787 PKT [137339] HINT:  Future log output will appear in directory "log".

@@ -1,0 +1,101 @@
+// ============================================================================
+// FILE:       frontend/src/api/client.ts
+// PURPOSE:    Core HTTP client wrapper using browser Fetch API.
+//             Automatically attaches X-User-Id and X-Role headers from localStorage,
+//             prepends the API base prefix (/api/v1), and unpacks FastAPI errors.
+// HOW IT WORKS: Exports apiRequest<T>() helper function used by all feature API
+//             modules. Unpacks JSON response payloads or returns void on 204 No Content.
+// USED BY / DEPENDS ON: src/api/users.ts, src/api/tasks.ts, src/api/comments.ts,
+//             src/api/admin.ts.
+// KEY CONCEPTS: Fetch abstraction, header-based authentication, error parsing,
+//             type-safe responses.
+// ============================================================================
+
+// Base API URL prefix. Defaults to /api/v1 which is proxied by Vite in dev.
+const BASE_URL = import.meta.env.VITE_API_BASE_URL || "/api/v1";
+
+/**
+ * Dispatches an HTTP request with active user role headers.
+ *
+ * @template T - Expected JSON response shape.
+ * @param {string} endpoint - API path (e.g. '/tasks' or '/users/1').
+ * @param {RequestInit} [options={}] - Standard Fetch options (method, body, etc.).
+ * @returns {Promise<T>} Parsed JSON response payload.
+ * @throws {Error} Human-readable error message parsed from backend 4xx/5xx responses.
+ */
+export async function apiRequest<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
+  // Construct full URL by combining base prefix and endpoint.
+  const cleanEndpoint = endpoint.startsWith("/") ? endpoint : `/${endpoint}`;
+  const url = `${BASE_URL}${cleanEndpoint}`;
+
+  // Read active user identity from browser localStorage.
+  const storedUserId = localStorage.getItem("taskflow_user_id") || "1";
+  const storedRole = localStorage.getItem("taskflow_role") || "admin";
+
+  // Prepare HTTP headers map.
+  const headers = new Headers(options.headers || {});
+
+  // Set default JSON Content-Type if not sending FormData.
+  if (!(options.body instanceof FormData) && !headers.has("Content-Type")) {
+    headers.set("Content-Type", "application/json");
+  }
+
+  // Inject authentication headers on every outgoing request.
+  headers.set("X-User-Id", storedUserId);
+  headers.set("X-Role", storedRole);
+
+  // Dispatch network request.
+  const response = await fetch(url, {
+    ...options,
+    headers,
+  });
+
+  // Handle HTTP 204 No Content response.
+  if (response.status === 204) {
+    return null as unknown as T;
+  }
+
+  // Check if response indicates an error (status >= 400).
+  if (!response.ok) {
+    let errorMessage = `HTTP ${response.status}: ${response.statusText}`;
+    try {
+      // Attempt to extract detail string from FastAPI error response envelope.
+      const errorData = await response.json();
+      if (errorData && errorData.detail) {
+        if (typeof errorData.detail === "string") {
+          errorMessage = errorData.detail;
+        } else if (Array.isArray(errorData.detail)) {
+          // Join Pydantic validation error descriptions.
+          errorMessage = errorData.detail.map((err: any) => err.msg || JSON.stringify(err)).join(", ");
+        }
+      }
+    } catch {
+      // If response body is not JSON, retain default status text.
+    }
+    // Throw error to be caught by React Query or caller.
+    throw new Error(errorMessage);
+  }
+
+  // Parse and return JSON payload.
+  return response.json();
+}
+
+export async function apiDownload(endpoint: string): Promise<Blob> {
+  const cleanEndpoint = endpoint.startsWith("/") ? endpoint : `/${endpoint}`;
+  const storedUserId = localStorage.getItem("taskflow_user_id") || "1";
+  const storedRole = localStorage.getItem("taskflow_role") || "admin";
+  const response = await fetch(`${BASE_URL}${cleanEndpoint}`, {
+    headers: { "X-User-Id": storedUserId, "X-Role": storedRole },
+  });
+  if (!response.ok) {
+    let message = `HTTP ${response.status}: ${response.statusText}`;
+    try {
+      const body = await response.json();
+      if (typeof body.detail === "string") message = body.detail;
+    } catch {
+      // Preserve the status message when the error is not JSON.
+    }
+    throw new Error(message);
+  }
+  return response.blob();
+}

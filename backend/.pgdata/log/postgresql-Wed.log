@@ -1,0 +1,73 @@
+2026-10-14 19:25:10.617 PKT [7414] LOG:  starting PostgreSQL 18.6 on x86_64-redhat-linux-gnu, compiled by gcc (GCC) 16.1.1 20260515 (Red Hat 16.1.1-2), 64-bit
+2026-10-14 19:25:10.618 PKT [7414] LOG:  listening on IPv6 address "::1", port 5433
+2026-10-14 19:25:10.618 PKT [7414] LOG:  listening on IPv4 address "127.0.0.1", port 5433
+2026-10-14 19:25:10.634 PKT [7414] LOG:  listening on Unix socket "/home/bobi/Desktop/Python projects hccda/todo/backend/.pgdata/.s.PGSQL.5433"
+2026-10-14 19:25:10.673 PKT [7421] LOG:  database system was shut down at 2026-10-14 19:24:41 PKT
+2026-10-14 19:25:10.712 PKT [7414] LOG:  database system is ready to accept connections
+2026-10-14 19:25:24.501 PKT [7426] ERROR:  CREATE DATABASE cannot run inside a transaction block
+2026-10-14 19:25:24.501 PKT [7426] STATEMENT:  CREATE USER taskflow_user WITH LOGIN PASSWORD 'CHANGE_ME_strong_password'; CREATE DATABASE taskflow OWNER taskflow_user; CREATE DATABASE taskflow_test OWNER taskflow_user; GRANT ALL PRIVILEGES ON DATABASE taskflow TO taskflow_user; GRANT ALL PRIVILEGES ON DATABASE taskflow_test TO taskflow_user;
+2026-10-14 19:25:31.565 PKT [7429] ERROR:  role "taskflow_user" does not exist
+2026-10-14 19:25:31.565 PKT [7429] STATEMENT:  CREATE DATABASE taskflow OWNER taskflow_user;
+2026-10-14 19:30:10.768 PKT [7419] LOG:  checkpoint starting: time
+2026-10-14 19:31:15.519 PKT [7981] LOG:  could not receive data from client: Connection reset by peer
+2026-10-14 19:31:15.519 PKT [7983] LOG:  could not receive data from client: Connection reset by peer
+2026-10-14 19:31:15.519 PKT [7983] LOG:  unexpected EOF on client connection with an open transaction
+2026-10-14 19:31:15.520 PKT [7981] LOG:  unexpected EOF on client connection with an open transaction
+2026-10-14 19:31:15.520 PKT [7988] LOG:  could not receive data from client: Connection reset by peer
+2026-10-14 19:31:15.520 PKT [7988] LOG:  unexpected EOF on client connection with an open transaction
+2026-10-14 19:31:15.523 PKT [7985] LOG:  could not receive data from client: Connection reset by peer
+2026-10-14 19:31:15.524 PKT [7985] LOG:  unexpected EOF on client connection with an open transaction
+2026-10-14 19:31:45.555 PKT [7990] LOG:  could not receive data from client: Connection reset by peer
+2026-10-14 19:31:45.556 PKT [7990] LOG:  unexpected EOF on client connection with an open transaction
+2026-10-14 19:31:45.556 PKT [7992] LOG:  could not receive data from client: Connection reset by peer
+2026-10-14 19:31:45.556 PKT [7992] LOG:  unexpected EOF on client connection with an open transaction
+2026-10-14 19:31:45.557 PKT [7994] LOG:  could not receive data from client: Connection reset by peer
+2026-10-14 19:31:45.557 PKT [8005] LOG:  could not receive data from client: Connection reset by peer
+2026-10-14 19:31:45.559 PKT [7999] LOG:  could not receive data from client: Connection reset by peer
+2026-10-14 19:31:45.559 PKT [8005] LOG:  unexpected EOF on client connection with an open transaction
+2026-10-14 19:31:45.559 PKT [7994] LOG:  unexpected EOF on client connection with an open transaction
+2026-10-14 19:31:45.562 PKT [7999] LOG:  unexpected EOF on client connection with an open transaction
+2026-10-14 19:31:45.562 PKT [7996] LOG:  could not receive data from client: Connection reset by peer
+2026-10-14 19:31:45.562 PKT [7996] LOG:  unexpected EOF on client connection with an open transaction
+2026-10-14 19:31:45.568 PKT [8001] LOG:  could not receive data from client: Connection reset by peer
+2026-10-14 19:31:45.568 PKT [8001] LOG:  unexpected EOF on client connection with an open transaction
+2026-10-14 19:31:45.575 PKT [8007] LOG:  could not receive data from client: Connection reset by peer
+2026-10-14 19:31:45.575 PKT [8007] LOG:  unexpected EOF on client connection with an open transaction
+2026-10-14 19:32:22.864 PKT [8017] LOG:  could not receive data from client: Connection reset by peer
+2026-10-14 19:32:22.867 PKT [8017] LOG:  unexpected EOF on client connection with an open transaction
+2026-10-14 19:32:22.867 PKT [8012] LOG:  could not receive data from client: Connection reset by peer
+2026-10-14 19:32:22.867 PKT [8019] LOG:  could not receive data from client: Connection reset by peer
+2026-10-14 19:32:22.867 PKT [8012] LOG:  unexpected EOF on client connection with an open transaction
+2026-10-14 19:32:22.867 PKT [8019] LOG:  unexpected EOF on client connection with an open transaction
+2026-10-14 19:32:22.869 PKT [8024] LOG:  could not receive data from client: Connection reset by peer
+2026-10-14 19:32:22.869 PKT [8024] LOG:  unexpected EOF on client connection with an open transaction
+2026-10-14 19:32:22.869 PKT [8022] LOG:  could not receive data from client: Connection reset by peer
+2026-10-14 19:32:22.869 PKT [8022] LOG:  unexpected EOF on client connection with an open transaction
+2026-10-14 19:32:22.871 PKT [8026] LOG:  could not receive data from client: Connection reset by peer
+2026-10-14 19:32:22.871 PKT [8026] LOG:  unexpected EOF on client connection with an open transaction
+2026-10-14 19:32:22.878 PKT [8010] LOG:  could not receive data from client: Connection reset by peer
+2026-10-14 19:32:22.878 PKT [8010] LOG:  unexpected EOF on client connection with an open transaction
+2026-10-14 19:32:22.881 PKT [8029] LOG:  could not receive data from client: Connection reset by peer
+2026-10-14 19:32:22.881 PKT [8029] LOG:  unexpected EOF on client connection with an open transaction
+2026-10-14 19:32:24.555 PKT [8031] LOG:  could not receive data from client: Connection reset by peer
+2026-10-14 19:32:24.555 PKT [8031] LOG:  unexpected EOF on client connection with an open transaction
+2026-10-14 19:32:24.562 PKT [8033] LOG:  could not receive data from client: Connection reset by peer
+2026-10-14 19:32:24.562 PKT [8033] LOG:  unexpected EOF on client connection with an open transaction
+2026-10-14 19:32:24.569 PKT [7973] LOG:  could not receive data from client: Connection reset by peer
+2026-10-14 19:32:24.569 PKT [7973] LOG:  unexpected EOF on client connection with an open transaction
+2026-10-14 19:32:55.355 PKT [8039] LOG:  unexpected EOF on client connection with an open transaction
+2026-10-14 19:32:55.628 PKT [8041] LOG:  could not receive data from client: Connection reset by peer
+2026-10-14 19:32:55.628 PKT [8041] LOG:  unexpected EOF on client connection with an open transaction
+2026-10-14 19:33:36.813 PKT [7419] LOG:  checkpoint complete: wrote 2041 buffers (12.5%), wrote 3 SLRU buffers; 0 WAL file(s) added, 0 removed, 1 recycled; write=205.733 s, sync=0.287 s, total=206.046 s; sync files=1350, longest=0.005 s, average=0.001 s; distance=9621 kB, estimate=9621 kB; lsn=0/229B8B8, redo lsn=0/2128ED8
+2026-10-14 19:35:10.824 PKT [7419] LOG:  checkpoint starting: time
+2026-10-14 19:35:25.382 PKT [7419] LOG:  checkpoint complete: wrote 140 buffers (0.9%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=14.089 s, sync=0.216 s, total=14.559 s; sync files=1092, longest=0.012 s, average=0.001 s; distance=2207 kB, estimate=8880 kB; lsn=0/238D5C8, redo lsn=0/2350BB0
+2026-10-14 19:40:10.491 PKT [7419] LOG:  checkpoint starting: time
+2026-10-14 19:40:16.559 PKT [7419] LOG:  checkpoint complete: wrote 42 buffers (0.3%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=4.775 s, sync=0.447 s, total=6.069 s; sync files=1443, longest=0.026 s, average=0.001 s; distance=1274 kB, estimate=8119 kB; lsn=0/24C31B8, redo lsn=0/248F5F8
+2026-10-14 19:45:10.661 PKT [7419] LOG:  checkpoint starting: time
+2026-10-14 19:45:15.060 PKT [7419] LOG:  checkpoint complete: wrote 42 buffers (0.3%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=4.238 s, sync=0.060 s, total=4.400 s; sync files=655, longest=0.004 s, average=0.001 s; distance=698 kB, estimate=7377 kB; lsn=0/253E170, redo lsn=0/253E118
+2026-10-14 20:54:47.210 PKT [7414] LOG:  received smart shutdown request
+2026-10-14 20:54:47.243 PKT [7414] LOG:  background worker "logical replication launcher" (PID 7424) exited with exit code 1
+2026-10-14 20:54:47.246 PKT [7419] LOG:  shutting down
+2026-10-14 20:54:47.284 PKT [7419] LOG:  checkpoint starting: shutdown immediate
+2026-10-14 20:54:47.391 PKT [7419] LOG:  checkpoint complete: wrote 0 buffers (0.0%), wrote 0 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.005 s, sync=0.001 s, total=0.145 s; sync files=0, longest=0.000 s, average=0.000 s; distance=0 kB, estimate=6639 kB; lsn=0/253E220, redo lsn=0/253E220
+2026-10-14 20:54:47.465 PKT [7414] LOG:  database system is shut down

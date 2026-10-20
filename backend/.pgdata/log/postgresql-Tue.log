@@ -1,0 +1,43 @@
+2026-10-20 15:01:22.887 PKT [137206] LOG:  starting PostgreSQL 18.6 on x86_64-redhat-linux-gnu, compiled by gcc (GCC) 16.1.1 20260515 (Red Hat 16.1.1-2), 64-bit
+2026-10-20 15:01:22.888 PKT [137206] LOG:  could not bind IPv6 address "::1": Address already in use
+2026-10-20 15:01:22.888 PKT [137206] HINT:  Is another postmaster already running on port 5432? If not, wait a few seconds and retry.
+2026-10-20 15:01:22.888 PKT [137206] LOG:  could not bind IPv4 address "127.0.0.1": Address already in use
+2026-10-20 15:01:22.888 PKT [137206] HINT:  Is another postmaster already running on port 5432? If not, wait a few seconds and retry.
+2026-10-20 15:01:22.888 PKT [137206] WARNING:  could not create listen socket for "localhost"
+2026-10-20 15:01:22.889 PKT [137206] FATAL:  could not create any TCP/IP sockets
+2026-10-20 15:01:22.893 PKT [137206] LOG:  database system is shut down
+2026-10-20 15:02:05.587 PKT [137273] LOG:  starting PostgreSQL 18.6 on x86_64-redhat-linux-gnu, compiled by gcc (GCC) 16.1.1 20260515 (Red Hat 16.1.1-2), 64-bit
+2026-10-20 15:02:05.588 PKT [137273] LOG:  listening on IPv6 address "::1", port 5433
+2026-10-20 15:02:05.588 PKT [137273] LOG:  listening on IPv4 address "127.0.0.1", port 5433
+2026-10-20 15:02:05.593 PKT [137273] FATAL:  could not create lock file "/var/run/postgresql/.s.PGSQL.5433.lock": Permission denied
+2026-10-20 15:02:05.596 PKT [137273] LOG:  database system is shut down
+2026-10-20 15:02:37.787 PKT [137339] LOG:  starting PostgreSQL 18.6 on x86_64-redhat-linux-gnu, compiled by gcc (GCC) 16.1.1 20260515 (Red Hat 16.1.1-2), 64-bit
+2026-10-20 15:02:37.787 PKT [137339] LOG:  listening on IPv6 address "::1", port 5433
+2026-10-20 15:02:37.787 PKT [137339] LOG:  listening on IPv4 address "127.0.0.1", port 5433
+2026-10-20 15:02:37.792 PKT [137339] LOG:  listening on Unix socket "/home/bobi/Desktop/Python projects hccda/todo/backend/.pgdata/.s.PGSQL.5433"
+2026-10-20 15:02:37.803 PKT [137346] LOG:  database system was shut down at 2026-10-14 20:54:47 PKT
+2026-10-20 15:02:37.818 PKT [137339] LOG:  database system is ready to accept connections
+2026-10-20 15:07:37.639 PKT [137344] LOG:  checkpoint starting: time
+2026-10-20 15:07:44.209 PKT [137344] LOG:  checkpoint complete: wrote 61 buffers (0.4%), wrote 3 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=6.165 s, sync=0.163 s, total=6.570 s; sync files=2062, longest=0.014 s, average=0.001 s; distance=1705 kB, estimate=1705 kB; lsn=0/26E87C8, redo lsn=0/26E8738
+2026-10-20 15:12:37.317 PKT [137344] LOG:  checkpoint starting: time
+2026-10-20 15:12:38.775 PKT [137344] LOG:  checkpoint complete: wrote 14 buffers (0.1%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=1.410 s, sync=0.033 s, total=1.467 s; sync files=15, longest=0.004 s, average=0.003 s; distance=15 kB, estimate=1536 kB; lsn=0/26EC3F8, redo lsn=0/26EC3A0
+2026-10-20 15:17:37.876 PKT [137344] LOG:  checkpoint starting: time
+2026-10-20 15:17:39.964 PKT [137344] LOG:  checkpoint complete: wrote 20 buffers (0.1%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=2.008 s, sync=0.060 s, total=2.089 s; sync files=150, longest=0.004 s, average=0.001 s; distance=165 kB, estimate=1399 kB; lsn=0/2715A68, redo lsn=0/2715A10
+2026-10-20 15:22:38.064 PKT [137344] LOG:  checkpoint starting: time
+2026-10-20 15:22:40.307 PKT [137344] LOG:  checkpoint complete: wrote 22 buffers (0.1%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=2.209 s, sync=0.021 s, total=2.244 s; sync files=9, longest=0.004 s, average=0.003 s; distance=115 kB, estimate=1270 kB; lsn=0/2732A60, redo lsn=0/2732A08
+2026-10-20 16:35:27.961 PKT [137344] LOG:  checkpoint starting: time
+2026-10-20 16:35:29.008 PKT [137344] LOG:  checkpoint complete: wrote 10 buffers (0.1%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=1.009 s, sync=0.024 s, total=1.047 s; sync files=11, longest=0.004 s, average=0.003 s; distance=6 kB, estimate=1144 kB; lsn=0/2734328, redo lsn=0/27342D0
+2026-10-20 16:40:27.112 PKT [137344] LOG:  checkpoint starting: time
+2026-10-20 16:40:27.652 PKT [137344] LOG:  checkpoint complete: wrote 5 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.506 s, sync=0.015 s, total=0.544 s; sync files=6, longest=0.004 s, average=0.003 s; distance=2 kB, estimate=1030 kB; lsn=0/2734C80, redo lsn=0/2734C28
+2026-10-20 18:15:29.489 PKT [137344] LOG:  checkpoint starting: time
+2026-10-20 18:15:29.612 PKT [137344] LOG:  checkpoint complete: wrote 1 buffers (0.0%), wrote 0 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.104 s, sync=0.003 s, total=0.126 s; sync files=1, longest=0.003 s, average=0.003 s; distance=0 kB, estimate=927 kB; lsn=0/2734F28, redo lsn=0/2734ED0
+2026-10-20 18:40:30.116 PKT [137344] LOG:  checkpoint starting: time
+2026-10-20 18:40:31.263 PKT [137344] LOG:  checkpoint complete: wrote 11 buffers (0.1%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=1.109 s, sync=0.026 s, total=1.151 s; sync files=12, longest=0.004 s, average=0.003 s; distance=10 kB, estimate=835 kB; lsn=0/2737998, redo lsn=0/2737940
+2026-10-20 18:45:30.363 PKT [137344] LOG:  checkpoint starting: time
+2026-10-20 18:45:30.483 PKT [137344] LOG:  checkpoint complete: wrote 1 buffers (0.0%), wrote 0 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.101 s, sync=0.004 s, total=0.121 s; sync files=1, longest=0.004 s, average=0.004 s; distance=0 kB, estimate=752 kB; lsn=0/2737C60, redo lsn=0/2737C08
+2026-10-20 19:00:30.784 PKT [137344] LOG:  checkpoint starting: time
+2026-10-20 19:00:34.869 PKT [137344] LOG:  checkpoint complete: wrote 39 buffers (0.2%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=3.922 s, sync=0.084 s, total=4.085 s; sync files=1300, longest=0.004 s, average=0.001 s; distance=1065 kB, estimate=1065 kB; lsn=0/28422A0, redo lsn=0/2842248
+2026-10-20 19:20:31.269 PKT [137344] LOG:  checkpoint starting: time
+2026-10-20 19:20:31.395 PKT [137344] LOG:  checkpoint complete: wrote 1 buffers (0.0%), wrote 0 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.102 s, sync=0.003 s, total=0.126 s; sync files=1, longest=0.003 s, average=0.003 s; distance=0 kB, estimate=959 kB; lsn=0/28425B0, redo lsn=0/2842558
+2026-10-20 19:50:31.136 PKT [137344] LOG:  checkpoint starting: time
+2026-10-20 19:50:36.073 PKT [137344] LOG:  checkpoint complete: wrote 44 buffers (0.3%), wrote 2 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=4.428 s, sync=0.183 s, total=4.939 s; sync files=2868, longest=0.011 s, average=0.001 s; distance=2165 kB, estimate=2165 kB; lsn=0/2A5FB98, redo lsn=0/2A5FB08
