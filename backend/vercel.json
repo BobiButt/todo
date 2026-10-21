@@ -11,7 +11,7 @@
   "env": {
     "ENVIRONMENT": "production",
     "DATABASE_URL": "postgresql+asyncpg://user:password@host:port/dbname",
-    "CORS_ORIGINS": "[\"https://your-frontend.vercel.app\"]",
+    "CORS_ORIGINS": "[\"https://frontend-five-rust-43.vercel.app/"]",
     "APP_PREFIX": "/api/v1",
     "SECRET_KEY": "change-me-in-production",
     "MAX_IMPORT_BYTES": "2097152"
