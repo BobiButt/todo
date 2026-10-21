@@ -47,6 +47,7 @@ from app.models.comment import Comment
 from app.models.subtask import Subtask
 from app.models.task import Task
 from app.models.user import User
+from app.services.auth import create_access_token
 from app.schemas.common import Priority, Role, Status
 
 # Tests always use the separate database configured in backend/.env.
@@ -147,20 +148,23 @@ async def seeded_users(db_session: AsyncSession) -> dict[str, User]:
 
 @pytest.fixture
 def admin_headers(seeded_users: dict[str, User]) -> dict[str, str]:
-    """Headers for acting as the seeded administrator."""
+    """Headers for acting as the seeded administrator (JWT Bearer token)."""
     admin = seeded_users["admin"]
-    return {"X-User-Id": str(admin.id), "X-Role": admin.role}
+    token = create_access_token({"sub": str(admin.id)})
+    return {"Authorization": f"Bearer {token}"}
 
 
 @pytest.fixture
 def user1_headers(seeded_users: dict[str, User]) -> dict[str, str]:
-    """Headers for acting as regular user 1."""
+    """Headers for acting as regular user 1 (JWT Bearer token)."""
     user = seeded_users["user1"]
-    return {"X-User-Id": str(user.id), "X-Role": user.role}
+    token = create_access_token({"sub": str(user.id)})
+    return {"Authorization": f"Bearer {token}"}
 
 
 @pytest.fixture
 def user2_headers(seeded_users: dict[str, User]) -> dict[str, str]:
-    """Headers for acting as regular user 2."""
+    """Headers for acting as regular user 2 (JWT Bearer token)."""
     user = seeded_users["user2"]
-    return {"X-User-Id": str(user.id), "X-Role": user.role}
+    token = create_access_token({"sub": str(user.id)})
+    return {"Authorization": f"Bearer {token}"}

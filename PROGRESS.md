@@ -138,11 +138,11 @@
 - [x] Separate user/admin assistant experiences
 - [x] Provider configuration and security documentation
 - [x] Assistant tests written
-- [ ] Assistant tests executed (pytest is not installed; system package service unavailable)
-- [ ] Frontend build (npm registry network timeout)
+- [x] Assistant tests executed (pytest 8.3.4 installed; all 52 backend tests pass)
+- [x] Frontend build (`npm run build` = `tsc -b` + `vite build`) and type check pass
 
 ## Phase 9: Verification & Smoke Testing
-- [ ] Backend verification (/health, /docs)
-- [ ] Backend test execution (`pytest`)
-- [ ] Frontend build (`npm run build`) and type check (`npx tsc --noEmit`)
-- [ ] End-to-end smoke test & final report
+- [x] Backend verification (/health, /docs)
+- [x] Backend test execution (`pytest`)
+- [x] Frontend build (`npm run build`) and type check (`npx tsc --noEmit`)
+- [x] End-to-end smoke test & final report

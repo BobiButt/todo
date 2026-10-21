@@ -20,17 +20,17 @@ from app.models.user import User
 
 
 @pytest.mark.asyncio
-async def test_regular_user_lists_only_self(client: httpx.AsyncClient, user1_headers: dict[str, str]) -> None:
+async def test_regular_user_lists_only_self(client: httpx.AsyncClient, user1_headers: dict[str, str], seeded_users: dict[str, User]) -> None:
     """Test that regular users cannot enumerate other user identities."""
     # Send GET /api/v1/users request.
     response = await client.get("/api/v1/users", headers=user1_headers)
     # Verify status code 200 OK.
     assert response.status_code == 200
-    # Verify response body is a list.
+    # Verify response body is a list containing only the requesting user.
     data = response.json()
     assert isinstance(data, list)
     assert len(data) == 1
-    assert data[0]["id"] == int(user1_headers["X-User-Id"])
+    assert data[0]["id"] == seeded_users["user1"].id
 
 
 @pytest.mark.asyncio

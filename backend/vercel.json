@@ -1,0 +1,20 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "version": 2,
+  "framework": "python",
+  "builds": [
+    { "src": "api/index.py", "use": "@vercel/python" }
+  ],
+  "routes": [
+    { "src": "/(.*)", "dest": "/api/index.py" }
+  ],
+  "env": {
+    "ENVIRONMENT": "production",
+    "DATABASE_URL": "postgresql+asyncpg://user:password@host:port/dbname",
+    "CORS_ORIGINS": "[\"https://your-frontend.vercel.app\"]",
+    "APP_PREFIX": "/api/v1",
+    "SECRET_KEY": "change-me-in-production",
+    "MAX_IMPORT_BYTES": "2097152"
+  },
+  "crons": []
+}

@@ -132,7 +132,6 @@ export function LoginPage() {
 }
 
 export function RegisterPage() {
-  const { login } = useAuth();
   const navigate = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -151,8 +150,7 @@ export function RegisterPage() {
     }
     setLoading(true);
     try {
-      const response = await registerUser({ name, email, password });
-      const user = (response as any).user;
+      await registerUser({ name, email, password });
       toast.success("Account created! Please check your email for the verification code.");
       navigate("/verify-otp", { state: { email } });
     } catch (error) {

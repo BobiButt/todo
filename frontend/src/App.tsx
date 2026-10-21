@@ -13,6 +13,7 @@ import { TaskWorkspace } from "@/components/TaskWorkspace";
 import { LoginPage, RegisterPage, OTPPage } from "@/pages/AuthPages";
 import { useRole } from "@/context/RoleContext";
 import { useAuth } from "@/context/AuthContext";
+import { User } from "@/types";
 
 type WorkspaceView = "tasks" | "assistant" | "admin";
 type Role = "admin" | "user";
@@ -146,18 +147,18 @@ function AppShell() {
 
 function AppView({
   view,
-  currentUserId,
-  users,
-  isAdmin,
-  activeRole,
-  effectiveUser,
+  currentUserId = 0,
+  users = [],
+  isAdmin = false,
+  activeRole = "user",
+  effectiveUser = null,
 }: {
   view: WorkspaceView;
-  currentUserId: number;
-  users: { id: number; name: string; role: string }[];
-  isAdmin: boolean;
-  activeRole: Role;
-  effectiveUser: { name?: string | null; email?: string | null } | null;
+  currentUserId?: number;
+  users?: User[];
+  isAdmin?: boolean;
+  activeRole?: Role;
+  effectiveUser?: User | null;
 }) {
   return (
     <>

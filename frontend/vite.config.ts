@@ -1,5 +1,5 @@
-# ============================================================================
-# FILE:       frontend/vite.config.ts
+// ============================================================================
+// FILE:       frontend/vite.config.ts
 // PURPOSE:    Vite build and development server configuration.
 //             Configures React plugin, path aliases, API proxy, and
 //             production build optimizations for Vercel deployment.
