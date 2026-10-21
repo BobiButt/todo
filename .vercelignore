@@ -1,3 +1,4 @@
+# Vercel deployment ignore patterns
 backend/
 .venv/
 .env

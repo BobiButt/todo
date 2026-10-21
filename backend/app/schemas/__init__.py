@@ -22,7 +22,17 @@ from app.schemas.common import (
 )
 
 # User endpoints:
-from app.schemas.user import UserCreate, UserRead, UserUpdate
+from app.schemas.user import (
+    UserCreate,
+    UserRead,
+    UserUpdate,
+    UserRegister,
+    UserLogin,
+    Token,
+    OTPVerify,
+    GoogleAuth,
+    OTPResend,
+)
 
 # Task endpoints (including nested subtask schemas):
 from app.schemas.comment import CommentCreate, CommentRead, CommentUpdate
@@ -52,10 +62,17 @@ __all__ = [
     "Priority",
     "Role",
     "Status",
+    "AuthProvider",
     # user
     "UserCreate",
     "UserRead",
     "UserUpdate",
+    "UserRegister",
+    "UserLogin",
+    "Token",
+    "OTPVerify",
+    "GoogleAuth",
+    "OTPResend",
     # task
     "SubtaskCreate",
     "SubtaskRead",

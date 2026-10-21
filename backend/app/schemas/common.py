@@ -43,6 +43,18 @@ class Role(StrEnum):
     USER = "user"
 
 
+class AuthProvider(StrEnum):
+    """Authentication provider used to create the account.
+
+    Members:
+        EMAIL: email + password registration with OTP verification.
+        GOOGLE: Google OAuth single sign-on.
+    """
+
+    EMAIL = "email"
+    GOOGLE = "google"
+
+
 class Priority(StrEnum):
     """Task importance levels, ordered from least to most urgent.
 

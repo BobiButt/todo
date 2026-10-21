@@ -14,8 +14,18 @@
 // Base API URL prefix. Defaults to /api/v1 which is proxied by Vite in dev.
 const BASE_URL = import.meta.env.VITE_API_BASE_URL || "/api/v1";
 
+// Module-level holder for the current JWT token (set by AuthContext on login).
+let currentToken: string | null = null;
+
 /**
- * Dispatches an HTTP request with active user role headers.
+ * Call this once from AuthContext to inject the current JWT token.
+ */
+export function setAuthToken(token: string | null) {
+  currentToken = token;
+}
+
+/**
+ * Dispatches an HTTP request with the JWT Bearer token.
  *
  * @template T - Expected JSON response shape.
  * @param {string} endpoint - API path (e.g. '/tasks' or '/users/1').
@@ -28,10 +38,6 @@ export async function apiRequest<T>(endpoint: string, options: RequestInit = {})
   const cleanEndpoint = endpoint.startsWith("/") ? endpoint : `/${endpoint}`;
   const url = `${BASE_URL}${cleanEndpoint}`;
 
-  // Read active user identity from browser localStorage.
-  const storedUserId = localStorage.getItem("taskflow_user_id") || "1";
-  const storedRole = localStorage.getItem("taskflow_role") || "admin";
-
   // Prepare HTTP headers map.
   const headers = new Headers(options.headers || {});
 
@@ -40,9 +46,10 @@ export async function apiRequest<T>(endpoint: string, options: RequestInit = {})
     headers.set("Content-Type", "application/json");
   }
 
-  // Inject authentication headers on every outgoing request.
-  headers.set("X-User-Id", storedUserId);
-  headers.set("X-Role", storedRole);
+  // Inject JWT Bearer token on every outgoing request.
+  if (currentToken) {
+    headers.set("Authorization", `Bearer ${currentToken}`);
+  }
 
   // Dispatch network request.
   const response = await fetch(url, {
@@ -53,6 +60,11 @@ export async function apiRequest<T>(endpoint: string, options: RequestInit = {})
   // Handle HTTP 204 No Content response.
   if (response.status === 204) {
     return null as unknown as T;
+  }
+
+  // Handle 401 Unauthorized — token invalid or expired.
+  if (response.status === 401) {
+    throw new Error("Session expired. Please log in again.");
   }
 
   // Check if response indicates an error (status >= 400).
@@ -82,10 +94,8 @@ export async function apiRequest<T>(endpoint: string, options: RequestInit = {})
 
 export async function apiDownload(endpoint: string): Promise<Blob> {
   const cleanEndpoint = endpoint.startsWith("/") ? endpoint : `/${endpoint}`;
-  const storedUserId = localStorage.getItem("taskflow_user_id") || "1";
-  const storedRole = localStorage.getItem("taskflow_role") || "admin";
   const response = await fetch(`${BASE_URL}${cleanEndpoint}`, {
-    headers: { "X-User-Id": storedUserId, "X-Role": storedRole },
+    headers: currentToken ? { Authorization: `Bearer ${currentToken}` } : {},
   });
   if (!response.ok) {
     let message = `HTTP ${response.status}: ${response.statusText}`;

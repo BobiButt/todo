@@ -22,11 +22,11 @@
 from pydantic import BaseModel, EmailStr, Field
 
 # datetime types the read-only timestamp fields of a user row.
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 
 # The Role enum comes from common.py, so the API and the DB column (which uses
 # the same enum as its default) can never disagree about allowed values.
-from app.schemas.common import Role
+from app.schemas.common import Role, AuthProvider
 
 
 class UserBase(BaseModel):
@@ -135,3 +135,98 @@ class UserRead(BaseModel):
         ge=0,
         description="Number of tasks owned by this user (computed per request).",
     )
+
+
+# ---------------------------------------------------------------------------
+# Authentication schemas
+# ---------------------------------------------------------------------------
+
+class UserRegister(BaseModel):
+    """Request body for POST /auth/register.
+
+    Attributes:
+        name (str): display name, 1-80 characters.
+        email (EmailStr): unique email address.
+        password (str): at least 8 characters.
+    """
+
+    name: str = Field(
+        ...,
+        min_length=1,
+        max_length=80,
+        description="Display name shown in the UI.",
+    )
+    email: EmailStr = Field(
+        ...,
+        description="Unique email address. An OTP will be sent here for verification.",
+    )
+    password: str = Field(
+        ...,
+        min_length=8,
+        max_length=128,
+        description="Account password (8-128 characters).",
+    )
+
+
+class UserLogin(BaseModel):
+    """Request body for POST /auth/login.
+
+    Attributes:
+        email (EmailStr): registered email address.
+        password (str): account password.
+    """
+
+    email: EmailStr = Field(..., description="Registered email address.")
+    password: str = Field(..., description="Account password.")
+
+
+class Token(BaseModel):
+    """JWT token response body.
+
+    Attributes:
+        access_token (str): JWT access token to send as `Authorization: Bearer <token>`.
+        token_type (str): always "bearer".
+        user (UserRead): the authenticated user's profile.
+    """
+
+    access_token: str
+    token_type: str = "bearer"
+    user: UserRead
+
+
+class OTPVerify(BaseModel):
+    """Request body for POST /auth/verify-otp.
+
+    Attributes:
+        email (EmailStr): email address that received the OTP.
+        code (str): 6-digit verification code.
+    """
+
+    email: EmailStr = Field(..., description="Email address that received the OTP.")
+    code: str = Field(
+        ...,
+        min_length=6,
+        max_length=6,
+        pattern=r"^\d{6}$",
+        description="6-digit verification code.",
+    )
+
+
+class GoogleAuth(BaseModel):
+    """Request body for POST /auth/google.
+
+    Attributes:
+        credential (str): Google ID token (credential) from Sign-In with Google.
+    """
+
+    credential: str = Field(..., description="Google ID token credential.")
+
+
+class OTPResend(BaseModel):
+    """Request body for POST /auth/resend-otp.
+
+    Attributes:
+        email (EmailStr): email address to resend OTP to.
+    """
+
+    email: EmailStr = Field(..., description="Email address to resend OTP to.")

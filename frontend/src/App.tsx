@@ -1,26 +1,95 @@
 import { useEffect, useState } from "react";
 import { Bot, ClipboardList, Shield } from "lucide-react";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Navigate,
+  useLocation,
+} from "react-router-dom";
 import { AdminWorkspace } from "@/components/AdminWorkspace";
 import { AssistantPanel } from "@/components/AssistantPanel";
 import { TaskWorkspace } from "@/components/TaskWorkspace";
+import { LoginPage, RegisterPage, OTPPage } from "@/pages/AuthPages";
 import { useRole } from "@/context/RoleContext";
+import { useAuth } from "@/context/AuthContext";
 
 type WorkspaceView = "tasks" | "assistant" | "admin";
+type Role = "admin" | "user";
+
+// Redirects to login if not authenticated.
+function ProtectedRoute({ children }: { children: React.ReactNode }) {
+  const { isAuthenticated, isLoading } = useAuth();
+  const location = useLocation();
+
+  if (isLoading) {
+    return (
+      <div className="auth-page">
+        <div className="auth-card">
+          <div className="auth-header">
+            <div className="auth-logo">T<span className="logo-accent">askflow</span></div>
+            <h1>Loading…</h1>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (!isAuthenticated) {
+    return <Navigate to="/login" state={{ from: location }} replace />;
+  }
+
+  return <>{children}</>;
+}
 
 export default function App() {
-  const { currentUserId, currentRole, currentUser, users, switchUser, refreshUsers } = useRole();
+  return (
+    <BrowserRouter>
+      <Routes>
+        {/* Public auth routes */}
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/verify-otp" element={<OTPPage />} />
+
+        {/* Protected app routes */}
+        <Route
+          element={
+            <ProtectedRoute>
+              <AppShell />
+            </ProtectedRoute>
+          }
+        >
+          <Route index element={<Navigate to="/tasks" replace />} />
+          <Route path="tasks" element={<AppView view="tasks" />} />
+          <Route path="assistant" element={<AppView view="assistant" />} />
+          <Route path="admin" element={<AppView view="admin" />} />
+        </Route>
+
+        <Route path="/" element={<Navigate to="/login" replace />} />
+      </Routes>
+    </BrowserRouter>
+  );
+}
+
+function AppShell() {
+  const { currentUserId, currentRole, currentUser, users, switchUser } = useRole();
+  const { user: authUser } = useAuth();
   const [view, setView] = useState<WorkspaceView>("tasks");
   const activeRole = currentUser?.role ?? currentRole;
   const isAdmin = activeRole === "admin";
+  const effectiveUser = authUser || currentUser;
 
   useEffect(() => {
     if (!isAdmin && view === "admin") setView("tasks");
   }, [isAdmin, view]);
 
   return (
-    <main className="taskflow-shell">
+    <>
       <nav className="topbar" aria-label="Workspace">
-        <a className="brand" href="/" aria-label="TaskFlow home"><span className="brand-glyph">T</span>taskflow</a>
+        <div className="brand-nav">
+          <a className="brand" href="/" aria-label="TaskFlow home"><span className="brand-glyph">T</span>taskflow</a>
+          <span className="user-welcome">{effectiveUser?.name}</span>
+        </div>
         <div className="workspace-switcher">
           <span>WORKSPACE IDENTITY</span>
           <select
@@ -34,13 +103,20 @@ export default function App() {
             {users.map((user) => <option key={user.id} value={user.id}>{user.name} · {user.role}</option>)}
           </select>
         </div>
+        <button className="topbar-signout" type="button" onClick={() => {
+          localStorage.removeItem("taskflow_token");
+          localStorage.removeItem("taskflow_user");
+          window.location.reload();
+        }}>
+          Sign out
+        </button>
       </nav>
       <div className="workspace-layout">
         <aside className="workspace-rail">
           <div className="rail-caption">CURRENT SPACE</div>
           <div className={`role-stamp ${activeRole}`}>
             <span className="role-dot" />
-            <div><strong>{isAdmin ? "Administrator" : "Personal workspace"}</strong><small>{currentUser?.email ?? "Loading identity…"}</small></div>
+            <div><strong>{isAdmin ? "Administrator" : "Personal workspace"}</strong><small>{effectiveUser?.email ?? "Loading identity…"}</small></div>
           </div>
           <div className="rail-rule" />
           <p className="rail-note">{isAdmin
@@ -54,11 +130,40 @@ export default function App() {
           <div className="rail-bottom">TASKFLOW<br />ASSISTED WORKSPACE</div>
         </aside>
         <div className="chat-stage">
-          {view === "tasks" && <TaskWorkspace key={`tasks-${activeRole}-${currentUserId}`} isAdmin={isAdmin} currentUserId={currentUserId} users={users} />}
-          {view === "assistant" && <AssistantPanel key={`${activeRole}-${currentUserId}`} role={activeRole} name={currentUser?.name ?? "there"} />}
-          {view === "admin" && isAdmin && <AdminWorkspace key={`admin-${currentUserId}`} currentUserId={currentUserId} users={users} onUsersChanged={refreshUsers} />}
+          <AppView
+            view={view}
+            currentUserId={currentUserId}
+            users={users}
+            isAdmin={isAdmin}
+            activeRole={activeRole}
+            effectiveUser={effectiveUser}
+          />
         </div>
       </div>
-    </main>
+    </>
+  );
+}
+
+function AppView({
+  view,
+  currentUserId,
+  users,
+  isAdmin,
+  activeRole,
+  effectiveUser,
+}: {
+  view: WorkspaceView;
+  currentUserId: number;
+  users: { id: number; name: string; role: string }[];
+  isAdmin: boolean;
+  activeRole: Role;
+  effectiveUser: { name?: string | null; email?: string | null } | null;
+}) {
+  return (
+    <>
+      {view === "tasks" && <TaskWorkspace isAdmin={isAdmin} currentUserId={currentUserId} users={users} />}
+      {view === "assistant" && <AssistantPanel role={activeRole} name={effectiveUser?.name ?? "there"} />}
+      {view === "admin" && isAdmin && <AdminWorkspace currentUserId={currentUserId} users={users} onUsersChanged={() => Promise.resolve()} />}
+    </>
   );
 }

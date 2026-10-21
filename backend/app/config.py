@@ -66,6 +66,23 @@ class Settings(BaseSettings):
     # 2 MiB = 2,097,152 bytes. Uploads above this receive HTTP 413.
     max_import_bytes: int = 2_097_152
 
+    # --- JWT authentication ---
+    secret_key: str = "change-me-in-production"
+    algorithm: str = "HS256"
+    access_token_expire_minutes: int = 60 * 24 * 7  # 7 days
+
+    # --- SMTP / email OTP ---
+    smtp_host: str = "smtp.example.com"
+    smtp_port: int = 587
+    smtp_user: str = ""
+    smtp_password: str = ""
+    smtp_from: str = "noreply@example.com"
+    otp_expire_minutes: int = 10
+
+    # --- Google OAuth ---
+    google_client_id: str = ""
+    google_client_secret: str = ""
+
     openrouter_api_key: str = ""
     openrouter_model: str = "openai/gpt-4o-mini"
     gemini_api_key: str = ""

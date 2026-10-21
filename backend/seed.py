@@ -32,7 +32,7 @@ from app.models.task import Task
 from app.models.user import User
 
 # Shared enums.
-from app.schemas.common import Priority, Role, Status
+from app.schemas.common import AuthProvider, Priority, Role, Status
 
 
 async def seed_data() -> None:
@@ -55,26 +55,41 @@ async def seed_data() -> None:
             name="Ada Lovelace",
             email="ada@taskflow.dev",
             role=Role.ADMIN.value,
+            provider=AuthProvider.EMAIL,
+            is_verified=True,
+            email_verified_at=datetime.now(timezone.utc),
         )
         user_alan = User(
             name="Alan Turing",
             email="alan@taskflow.dev",
             role=Role.USER.value,
+            provider=AuthProvider.EMAIL,
+            is_verified=True,
+            email_verified_at=datetime.now(timezone.utc),
         )
         user_grace = User(
             name="Grace Hopper",
             email="grace@taskflow.dev",
             role=Role.USER.value,
+            provider=AuthProvider.EMAIL,
+            is_verified=True,
+            email_verified_at=datetime.now(timezone.utc),
         )
         user_margaret = User(
             name="Margaret Hamilton",
             email="margaret@taskflow.dev",
             role=Role.USER.value,
+            provider=AuthProvider.EMAIL,
+            is_verified=True,
+            email_verified_at=datetime.now(timezone.utc),
         )
         user_linus = User(
             name="Linus Torvalds",
             email="linus@taskflow.dev",
             role=Role.USER.value,
+            provider=AuthProvider.EMAIL,
+            is_verified=True,
+            email_verified_at=datetime.now(timezone.utc),
         )
 
         db.add_all([admin_user, user_alan, user_grace, user_margaret, user_linus])

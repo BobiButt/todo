@@ -30,6 +30,7 @@ from app.config import settings
 # Router instances.
 from app.routers.admin import router as admin_router
 from app.routers.assistant import router as assistant_router
+from app.routers.auth import router as auth_router
 from app.routers.comments import router as comments_router
 from app.routers.tasks import router as tasks_router
 from app.routers.transfer import router as transfer_router
@@ -98,6 +99,7 @@ async def health_check() -> JSONResponse:
 
 
 # Mount versioned API routers under the configured prefix (/api/v1).
+app.include_router(auth_router, prefix=settings.app_prefix)
 app.include_router(users_router, prefix=settings.app_prefix)
 app.include_router(transfer_router, prefix=settings.app_prefix)
 app.include_router(tasks_router, prefix=settings.app_prefix)

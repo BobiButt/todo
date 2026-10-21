@@ -34,6 +34,16 @@ pydantic-settings==2.6.1
 # email-validator makes Pydantic's EmailStr type work (unique user emails)
 email-validator==2.2.0
 
+# --- Authentication & security ---------------------------------------------
+# python-jose[cryptography] for JWT encode/decode and verification
+python-jose[cryptography]==3.3.0
+# passlib[bcrypt] for password hashing
+passlib[bcrypt]==1.7.4
+# google-auth for verifying Google ID tokens
+google-auth==2.33.0
+# aiosmtplib for async SMTP email (OTP delivery)
+aiosmtplib==3.0.3
+
 # --- Runtime helpers --------------------------------------------------------
 # python-dotenv is used internally by pydantic-settings to read .env
 python-dotenv==1.0.1
