@@ -12,7 +12,14 @@
 // ============================================================================
 
 // Base API URL prefix. Defaults to /api/v1 which is proxied by Vite in dev.
-const BASE_URL = import.meta.env.VITE_API_BASE_URL || "/api/v1";
+// Read from API_BASE_URL (set in Vercel Environment Variables or .env).
+// Vite only inlines VITE_* variables at build time, so we inject API_BASE_URL
+// via vite.config.ts define and fall back to VITE_API_BASE_URL then /api/v1.
+const BASE_URL =
+  // injected by vite.config.ts define at build time
+  (import.meta.env as { API_BASE_URL?: string }).API_BASE_URL ||
+  import.meta.env.VITE_API_BASE_URL ||
+  "/api/v1";
 
 // Module-level holder for the current JWT token (set by AuthContext on login).
 let currentToken: string | null = null;

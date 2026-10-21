@@ -26,6 +26,12 @@ export default defineConfig({
             },
         },
     },
+    // Inject API_BASE_URL (set in Vercel Env Vars or .env) at build time so
+    // client.ts can read import.meta.env.API_BASE_URL (Vite only inlines VITE_*
+    // variables by default).
+    define: {
+        "import.meta.env.API_BASE_URL": JSON.stringify(process.env.API_BASE_URL || process.env.VITE_API_BASE_URL || "/api/v1"),
+    },
     build: {
         outDir: "dist",
         sourcemap: false,
