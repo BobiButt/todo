@@ -1,0 +1,9 @@
+# Vercel ignore patterns for the TaskFlow frontend project
+# Project root = frontend/ (set this as the Root Directory in Vercel)
+node_modules/
+.env
+.env.local
+.env.*.local
+*.md
+!.vercelignore
+!.vercel.json

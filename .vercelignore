@@ -1,4 +1,8 @@
-# Vercel deployment ignore patterns
+# Vercel deployment ignore patterns (root level)
+# NOTE: `dist/` is intentionally NOT ignored here so the frontend build output
+# (frontend/dist) is available when this repo root is used as a project root.
+# Each folder (frontend/, backend/) is meant to be its own Vercel project with
+# Root Directory set to that folder — see each folder's vercelignore.
 backend/
 .venv/
 .env
@@ -13,8 +17,8 @@ tests/
 .pgdata/
 .pytest_cache/
 node_modules/
-dist/
 *.md
 !.vercelignore
-!vercel.json
+!.vercel.json
 !frontend/
+!frontend/dist/

@@ -7,10 +7,6 @@
       "src": "frontend/package.json",
       "use": "@vercel/static-build",
       "config": { "distDir": "frontend/dist" }
-    },
-    {
-      "src": "backend/api/index.py",
-      "use": "@vercel/python"
     }
   ],
   "routes": [
@@ -20,16 +16,12 @@
       "dest": "/frontend/dist/assets/$1"
     },
     {
-      "src": "/api/(.*)",
-      "dest": "/backend/api/index.py"
-    },
-    {
       "src": "/(.*)",
       "dest": "/frontend/dist/index.html"
     }
   ],
   "env": {
-    "VITE_API_BASE_URL": "/api/v1"
+    "VITE_API_BASE_URL": "https://your-backend.vercel.app/api/v1"
   },
   "crons": []
 }
