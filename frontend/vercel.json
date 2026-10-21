@@ -5,7 +5,7 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "routes": [
-    // SPA fallback: every non-asset route serves index.html so refresh works.
+    
     { "src": "/(.*)", "dest": "/index.html" }
   ],
   "env": {
