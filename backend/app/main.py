@@ -98,6 +98,37 @@ async def health_check() -> JSONResponse:
     )
 
 
+@app.get(
+    "/",
+    tags=["System"],
+    summary="Home / server status",
+    description="Returns a welcome message and useful links to verify the backend is running.",
+    status_code=status.HTTP_200_OK,
+)
+async def home() -> JSONResponse:
+    """Backend home endpoint.
+
+    Returns:
+        JSONResponse: Welcome message with links to health check and API docs.
+    """
+    docs_hint = (
+        f"{settings.app_prefix}/docs (enabled in development)"
+        if settings.is_development
+        else "disabled in production"
+    )
+    return JSONResponse(
+        content={
+            "message": "TaskFlow API is running",
+            "status": "healthy",
+            "version": "1.0.0",
+            "environment": settings.environment,
+            "health": "/health",
+            "api_prefix": settings.app_prefix,
+            "docs": docs_hint,
+        }
+    )
+
+
 # Mount versioned API routers under the configured prefix (/api/v1).
 app.include_router(auth_router, prefix=settings.app_prefix)
 app.include_router(users_router, prefix=settings.app_prefix)
